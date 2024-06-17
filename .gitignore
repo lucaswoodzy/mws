@@ -1,0 +1,27 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `cargo test`
+*.test
+
+# Intermediate files and build artifacts
+masonic-web-services/target/
+masonic-web-services/target/debug/
+masonic-web-services/target/release/
+
+# Cargo package-specific files
+**/*.rs.bk
+**/*.rs~
+
+# Rust/Cargo specific
+/Cargo.lock
+/.cargo/
+/.rustup/
+
+# Ignore IDE-specific files (Optional)
+.vscode/
+*.swp

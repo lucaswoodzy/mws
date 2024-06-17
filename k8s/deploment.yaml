@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: masonic-web-services
+  namespace: default
+spec:
+  replicas: 3  # Number of replicas for scalingr
+  selector:
+    matchLabels:
+      app: masonic-web-services
+  template:
+    metadata:
+      labels:
+        app: masonic-web-services
+    spec:
+      containers:
+      - name: masonic-web-services
+        image: masonicwebservices/masonic-web-services:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: masonic-web-services-config
+              key: DATABASE_URL
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
